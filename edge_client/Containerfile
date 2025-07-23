@@ -1,0 +1,17 @@
+FROM python:3.12-slim
+
+LABEL org.opencontainers.image.title="edge_client"
+LABEL org.opencontainers.image.description="Edge client detections"
+LABEL org.opencontainers.image.version="0.1.0"
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        ffmpeg gstreamer1.0-libav libsm6 libxext6 wget && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD ["python", "-m", "main"]
