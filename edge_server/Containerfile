@@ -6,8 +6,6 @@ LABEL org.opencontainers.image.version="0.1.0"
 
 WORKDIR /app
 
-RUN mkdir .streamlit
-
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
